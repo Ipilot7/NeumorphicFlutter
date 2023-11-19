@@ -376,7 +376,7 @@ final accentColor = theme.accentColor;
 
 Toggle from light to dark
 ```dart
-NeumorphicTheme.of(context).themeMode = ThemeMode.dark;
+NeumorphicTheme.of(context)?.themeMode = ThemeMode.dark;
 ```
 
 Know if using dark
