@@ -131,10 +131,10 @@
       "name": "flutter_neumorphic",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-11-19T08:54:15.389733Z",
+  "generated": "2023-11-19T17:56:52.956088Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }

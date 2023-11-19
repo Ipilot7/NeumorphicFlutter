@@ -1,5 +1,7 @@
-import 'package:example/lib/color_selector.dart';
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+
+import '../lib/color_selector.dart';
 
 class NeumorphicTextPlayground extends StatefulWidget {
   @override
@@ -204,12 +206,12 @@ class __PageState extends State<_Page> {
     switch (selectedConfiguratorIndex) {
       case 0:
         return styleCustomizer();
-        break;
+        
       case 1:
         return elementCustomizer();
-        break;
+      
     }
-    return null;
+    return SizedBox.shrink();
   }
 
   Widget styleCustomizer() {
@@ -327,7 +329,7 @@ class __PageState extends State<_Page> {
           onColorChanged: (color) {
             setState(() {
               NeumorphicTheme.of(context)
-                  .updateCurrentTheme(NeumorphicThemeData(baseColor: color));
+                 ?.updateCurrentTheme(NeumorphicThemeData(baseColor: color));
             });
           },
           color: NeumorphicTheme.baseColor(context),

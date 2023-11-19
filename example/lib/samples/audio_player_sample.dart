@@ -234,10 +234,10 @@ class __PageState extends State<_Page> {
     );
   }
 
-  Color _iconsColor() {
+  Color? _iconsColor() {
     final theme = NeumorphicTheme.of(context);
-    if (theme.isUsingDark) {
-      return theme.current.accentColor;
+    if (theme?.isUsingDark??false) {
+      return theme?.current?.accentColor;
     } else {
       return null;
     }

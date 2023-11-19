@@ -1,5 +1,7 @@
-import 'package:example/lib/color_selector.dart';
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+
+import '../lib/color_selector.dart';
 
 class NeumorphicPlayground extends StatefulWidget {
   @override
@@ -30,7 +32,7 @@ class _Page extends StatefulWidget {
 class __PageState extends State<_Page> {
   LightSource lightSource = LightSource.topLeft;
   NeumorphicShape shape = NeumorphicShape.flat;
-  NeumorphicBoxShape boxShape;
+  NeumorphicBoxShape? boxShape;
   double depth = 5;
   double intensity = 0.5;
   double surfaceIntensity = 0.5;
@@ -71,7 +73,7 @@ class __PageState extends State<_Page> {
               child: MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   "back",
                   style: TextStyle(color: Colors.white),
@@ -102,7 +104,7 @@ class __PageState extends State<_Page> {
   int selectedConfiguratorIndex = 0;
 
   Widget _configurators() {
-    final Color buttonActiveColor = Theme.of(context).accentColor;
+    final Color buttonActiveColor = Theme.of(context).primaryColor;
     final Color buttonInnactiveColor = Colors.white;
 
     final Color textActiveColor = Colors.white;
@@ -198,23 +200,23 @@ class __PageState extends State<_Page> {
               )
             ],
           ),
-          _configuratorsChild(),
+          _configuratorsChild()??SizedBox.shrink(),
         ],
       ),
     );
   }
 
-  Widget _configuratorsChild() {
+  Widget? _configuratorsChild() {
     switch (selectedConfiguratorIndex) {
       case 0:
         return styleCustomizer();
-        break;
+        
       case 1:
         return elementCustomizer();
-        break;
+        
       case 2:
         return childCustomizer();
-        break;
+        
     }
     return null;
   }
@@ -270,7 +272,7 @@ class __PageState extends State<_Page> {
           onColorChanged: (color) {
             setState(() {
               NeumorphicTheme.of(context)
-                  .updateCurrentTheme(NeumorphicThemeData(baseColor: color));
+                  ?.updateCurrentTheme(NeumorphicThemeData(baseColor: color));
             });
           },
           color: NeumorphicTheme.baseColor(context),
@@ -429,9 +431,9 @@ class __PageState extends State<_Page> {
           alignment: Alignment.centerRight,
           child: Checkbox(
             value: this.haveNeumorphicChild,
-            onChanged: (value) {
+            onChanged: ( value) {
               setState(() {
-                haveNeumorphicChild = value;
+                haveNeumorphicChild = value??false;
               });
             },
           ),
@@ -457,7 +459,7 @@ class __PageState extends State<_Page> {
             value: this.drawAboveChild,
             onChanged: (value) {
               setState(() {
-                drawAboveChild = value;
+                drawAboveChild = value??false;
               });
             },
           ),
@@ -483,7 +485,7 @@ class __PageState extends State<_Page> {
             value: this.childOppositeLightsourceChild,
             onChanged: (value) {
               setState(() {
-                childOppositeLightsourceChild = value;
+                childOppositeLightsourceChild = value??false;
               });
             },
           ),
@@ -529,7 +531,7 @@ class __PageState extends State<_Page> {
   }
 
   Widget cornerRadiusSelector() {
-    if (boxShape.isRoundRect || boxShape.isBeveled) {
+    if (boxShape?.isRoundRect??false || (boxShape?.isBeveled??false)) {
       return Row(
         children: <Widget>[
           Padding(
@@ -544,11 +546,11 @@ class __PageState extends State<_Page> {
               onChanged: (value) {
                 setState(() {
                   cornerRadius = value;
-                  if (boxShape.isRoundRect) {
+                  if (boxShape?.isRoundRect??false) {
                     boxShape = NeumorphicBoxShape.roundRect(
                         BorderRadius.circular(this.cornerRadius));
                   }
-                  if (boxShape.isBeveled) {
+                  if (boxShape?.isBeveled ??false) {
                     boxShape = NeumorphicBoxShape.beveled(
                         BorderRadius.circular(this.cornerRadius));
                   }
@@ -622,7 +624,7 @@ class __PageState extends State<_Page> {
   }
 
   Widget boxshapeWidget() {
-    final Color buttonActiveColor = Theme.of(context).accentColor;
+    final Color buttonActiveColor = Theme.of(context).primaryColor;
     final Color buttonInnactiveColor = Colors.white;
 
     final Color textActiveColor = Colors.white;
@@ -643,13 +645,13 @@ class __PageState extends State<_Page> {
                       BorderRadius.circular(this.cornerRadius));
                 });
               },
-              color: boxShape.isRoundRect
+              color: boxShape?.isRoundRect??false
                   ? buttonActiveColor
                   : buttonInnactiveColor,
               child: Text(
                 "Rect",
                 style: TextStyle(
-                    color: boxShape.isRoundRect
+                    color: boxShape?.isRoundRect??false
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -669,11 +671,11 @@ class __PageState extends State<_Page> {
                 });
               },
               color:
-                  boxShape.isBeveled ? buttonActiveColor : buttonInnactiveColor,
+                  boxShape?.isBeveled??false ? buttonActiveColor : buttonInnactiveColor,
               child: Text(
                 "Beveled",
                 style: TextStyle(
-                    color: boxShape.isBeveled
+                    color: boxShape?.isBeveled??false
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -692,11 +694,11 @@ class __PageState extends State<_Page> {
                 });
               },
               color:
-                  boxShape.isCircle ? buttonActiveColor : buttonInnactiveColor,
+                  boxShape?.isCircle??false ? buttonActiveColor : buttonInnactiveColor,
               child: Text(
                 "Circle",
                 style: TextStyle(
-                    color: boxShape.isCircle
+                    color: boxShape?.isCircle??false
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -715,11 +717,11 @@ class __PageState extends State<_Page> {
                 });
               },
               color:
-                  boxShape.isStadium ? buttonActiveColor : buttonInnactiveColor,
+                  boxShape?.isStadium??false ? buttonActiveColor : buttonInnactiveColor,
               child: Text(
                 "Stadium",
                 style: TextStyle(
-                    color: boxShape.isStadium
+                    color: boxShape?.isStadium??false
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -738,13 +740,13 @@ class __PageState extends State<_Page> {
                       NeumorphicFlutterLogoPathProvider());
                 });
               },
-              color: boxShape.isCustomPath
+              color: boxShape?.isCustomPath??false
                   ? buttonActiveColor
                   : buttonInnactiveColor,
               child: Text(
                 "Custom",
                 style: TextStyle(
-                    color: boxShape.isCustomPath
+                    color: boxShape?.isCustomPath??false
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -756,7 +758,7 @@ class __PageState extends State<_Page> {
   }
 
   Widget shapeWidget() {
-    final Color buttonActiveColor = Theme.of(context).accentColor;
+    final Color buttonActiveColor = Theme.of(context).primaryColor;
     final Color buttonInnactiveColor = Colors.white;
 
     final Color iconActiveColor = Colors.white;

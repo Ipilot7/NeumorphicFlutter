@@ -324,9 +324,9 @@ class __PageContentState extends State<_PageContent> {
           child: NeumorphicRadio(
             groupValue: _dotIndex,
             value: 0,
-            onChanged: (value) {
+            onChanged: (int? value) {
               setState(() {
-                _dotIndex = value;
+                _dotIndex = value??0;
               });
             },
             style: NeumorphicRadioStyle(
@@ -344,9 +344,9 @@ class __PageContentState extends State<_PageContent> {
           child: NeumorphicRadio(
             groupValue: _dotIndex,
             value: 1,
-            onChanged: (value) {
+             onChanged: (int? value) {
               setState(() {
-                _dotIndex = value;
+                _dotIndex = value??0;
               });
             },
             style: NeumorphicRadioStyle(
@@ -364,9 +364,9 @@ class __PageContentState extends State<_PageContent> {
           child: NeumorphicRadio(
             groupValue: _dotIndex,
             value: 2,
-            onChanged: (value) {
+             onChanged: (int? value) {
               setState(() {
-                _dotIndex = value;
+                _dotIndex = value??0;
               });
             },
             style: NeumorphicRadioStyle(
